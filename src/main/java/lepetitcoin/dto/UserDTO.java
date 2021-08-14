@@ -22,6 +22,7 @@ public class UserDTO {
 	private int etat_email;
 	private String type_user;
 	private String ville;
+	private String region;
 	private String email;
 	private String password;
 	private String role;
@@ -34,6 +35,7 @@ public class UserDTO {
 			this.setFullName(user.getNom() + " " + user.getPrenom());
 			this.setDate_insc(user.getDate_insc());
 			this.setVille(user.getVille());
+			this.setRegion(user.getRegion());
 			this.setType_user(user.getType_user());
 			this.setTelephone(user.getTelephone());
 			this.setRegistre_comm(user.getRegistre_comm());

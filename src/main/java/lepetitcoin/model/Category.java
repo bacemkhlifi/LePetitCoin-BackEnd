@@ -26,7 +26,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","referenceList"})
 public class Category implements Serializable{
 	
 	/**
@@ -42,12 +41,10 @@ public class Category implements Serializable{
 	
 	private String name ;
 
-	//@JsonManagedReference
+	
+	
 	@OneToMany(mappedBy = "category")
-   
-    List <Annonce>  annonce;
-	
-	
+	List <SubCategory> subCategory;
 	
 	
 }

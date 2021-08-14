@@ -8,11 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import lepetitcoin.dao.CategoryRepository;
+import lepetitcoin.dao.RegionRepository;
 import lepetitcoin.dao.RoleRepository;
+import lepetitcoin.dao.SubCategoryRepository;
 import lepetitcoin.dao.UserRepository;
+import lepetitcoin.dao.VilleRepository;
 import lepetitcoin.model.Category;
+import lepetitcoin.model.Region;
 import lepetitcoin.model.Role;
+import lepetitcoin.model.SubCategory;
 import lepetitcoin.model.User;
+import lepetitcoin.model.Ville;
 
 @SpringBootApplication
 public class Main {
@@ -26,20 +32,50 @@ SpringApplication.run(Main.class,args);
 	public UserRepository userRep;
 	@Autowired
 	public RoleRepository roleRep;
+	@Autowired 
+	public SubCategoryRepository subCatRep;
+	@Autowired
+	public RegionRepository regionRep;
+	@Autowired
+	public VilleRepository villeRep;
 	
-	 @Bean
-	public void addCats()   {
-		Category cat = new Category(0,"immobilier",null);
-		Category cat1 = new Category(1,"véhiculess",null);
-		Category cat2 = new Category(2,"loisirs",null);
-		Category cat3 = new Category(3,"informatique",null);
-		Category cat4 = new Category(4,"emploi",null);
+	@Bean
+	public void villes() {
+		///1er ville 
+		Ville ville= new Ville(0,"Sfax",null);
+		this.villeRep.save(ville);
 		
-		this.catRep.save(cat);
-		this.catRep.save(cat1);
-		this.catRep.save(cat2);
-		this.catRep.save(cat3);
-		this.catRep.save(cat4);
+		Region region=new Region(0,"Jbeniyana",ville);
+		this.regionRep.save(region);
+	}
+	
+	@Bean
+	public void addCats()   {
+		/////1er categories
+		Category categ= new Category(1,"Immobilier",null);
+		this.catRep.save(categ);
+		
+		SubCategory subCat = new SubCategory(1,"Bureaux&commerces",null,categ);
+		this.subCatRep.save(subCat);
+		SubCategory subCat1 = new SubCategory(2,"Ventes immobilières",null,categ);
+		this.subCatRep.save(subCat1);
+		SubCategory subCat2 = new SubCategory(3,"Locations",null,categ);
+		this.subCatRep.save(subCat2);
+		///// 2eme categorie
+		Category categ1= new Category(2,"Multimédia",null);
+		this.catRep.save(categ1);
+		
+		SubCategory subCat0 = new SubCategory(4,"Informatique",null,categ1);
+		this.subCatRep.save(subCat0);
+		SubCategory subCat11 = new SubCategory(5,"Consoles & Jeux vidéo",null,categ1);
+		this.subCatRep.save(subCat11);
+		SubCategory subCat21 = new SubCategory(6,"Téléphonie",null,categ1);
+		
+		this.subCatRep.save(subCat21);
+		SubCategory subCat31 = new SubCategory(7,"Image & Son",null,categ1);
+		this.subCatRep.save(subCat31);
+		
+	
 	} 
 	@Bean 
 	public void defaultUsers() {
@@ -55,12 +91,10 @@ SpringApplication.run(Main.class,args);
 	
 		user0.setType_user("membre");
 		user0.setEtat_email(1);
-		Role role1= new Role(0,"membre",null);
+		Role role1= new Role(1,"membre",null);
 		
 		user0.setRole(role1);
 		this.roleRep.save(role1);
-		
-			
 		this.userRep.save(user0);
 	}
 	@Bean 
@@ -74,15 +108,11 @@ SpringApplication.run(Main.class,args);
 		user0.setDate_insc("30/07/2021");
 		user0.setAnnonce(null);
 		user0.setRole(null);
-		
 		user0.setEtat_email(1);
 		user0.setType_user("admin");
-		Role role1= new Role(0,"admin",null);
-		
+		Role role1= new Role(2,"admin",null);
 		user0.setRole(role1);
-		this.roleRep.save(role1);
-		
-			
+		this.roleRep.save(role1);	
 		this.userRep.save(user0);
 	}
 

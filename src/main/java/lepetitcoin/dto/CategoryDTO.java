@@ -13,12 +13,12 @@ public class CategoryDTO {
 	private int id_cat;
 	private String  name;
 	
-	private List<AnnonceDTO> annonce = new ArrayList<>();
+	private List<SubCategoryDTO> subCategory = new ArrayList<>();
 	public CategoryDTO(Category category) {
 		this.setId_cat(category.getId_cat());
 		this.setName(category.getName());
-		List<AnnonceDTO> annonceDTOs  =category.getAnnonce().stream().map(AnnonceDTO::new).collect(Collectors.toList());
-		 this.setAnnonce(annonceDTOs);
+		List<SubCategoryDTO> subCategoryDTOs  =category.getSubCategory().stream().map(SubCategoryDTO::new).collect(Collectors.toList());
+		 this.setSubCategory(subCategoryDTOs);
 		
 	}
 }

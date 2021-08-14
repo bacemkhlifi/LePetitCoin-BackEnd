@@ -57,6 +57,7 @@ public class User implements Serializable {
 	private int etat_email;
 	private String type_user;
 	private String ville;
+	private String region;
 	private String addresse;
 	@Id
 	private String email;

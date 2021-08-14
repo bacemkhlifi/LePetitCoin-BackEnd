@@ -1,8 +1,8 @@
 package lepetitcoin.model;
 
 import java.io.Serializable;
-
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,16 +37,13 @@ public class Annonce implements Serializable {
 	
 	private String price ;
 	
-	private String emplacement;
+	private String ville;
+	private String region;
 	private String description;
-	private String date ;
 	
-	//@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
-	 @JoinColumn(name="category_name", insertable=true, updatable=true)
-		@JsonProperty("category_name")
-		@JsonIgnoreProperties("category")
-	private Category category;
+	private Date date = new Date(id_ad) ;
+	
+	
 	//@JsonBackReference
 		@ManyToOne(fetch = FetchType.LAZY, optional=false)
 		 @JoinColumn(name="subCategory_id_subcat", insertable=true, updatable=true)

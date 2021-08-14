@@ -38,6 +38,7 @@ public class CategoryControlleur {
 	public Category setNewCategoty(@RequestBody Category category) {
 		return catRep.save(category);
 		
+		
 	}
 	//Api delete a category
 	@PostMapping(value="delete/category/{id}")
@@ -53,6 +54,7 @@ public class CategoryControlleur {
 	 List<CategoryDTO> getCategories() {
 		return categoryService.getCategories().stream().map(CategoryDTO::new).collect(Collectors.toList());
 	}
+	
 	
 	//API update category
 	@PutMapping(value="category/update/{id}")

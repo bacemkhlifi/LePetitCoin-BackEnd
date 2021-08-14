@@ -1,5 +1,6 @@
 package lepetitcoin.dto;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,15 +19,18 @@ public class AnnonceDTO {
 	
 	private String price ;
 	
-	private String emplacement;
+	private String ville;
+	private String region;
 	private String description;
-	private String date ;
+	private Date date = new Date(id_ad) ;
 	private List<String> user= new ArrayList<>();
 	
 	private String category;
+	private String subCategory;
 	public AnnonceDTO(Annonce annonce) {
 		this.setName(annonce.getName());
-		this.setEmplacement(annonce.getEmplacement());
+		this.setVille(annonce.getVille());
+		this.setRegion(annonce.getRegion());
 		this.setPrice(annonce.getPrice());
 		this.setDate(annonce.getDate());
 		this.setDescription(annonce.getDescription());
@@ -41,6 +45,7 @@ public class AnnonceDTO {
 		 
 		 this.setId_ad(annonce.getId_ad());
 		
-		this.setCategory(annonce.getCategory().getName());
+		this.setCategory(annonce.getSubCategory().getCategory().getName());
+		this.setSubCategory(annonce.getSubCategory().getName());
 	}
 }

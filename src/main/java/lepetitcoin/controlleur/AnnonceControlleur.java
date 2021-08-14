@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import lepetitcoin.dao.AnnonceRepository;
 import lepetitcoin.dao.CategoryRepository;
 import lepetitcoin.dao.RoleRepository;
+import lepetitcoin.dao.SubCategoryRepository;
 import lepetitcoin.dao.UserRepository;
 import lepetitcoin.dto.AnnonceDTO;
 import lepetitcoin.dto.UserDTO;
 import lepetitcoin.model.Annonce;
 import lepetitcoin.model.Category;
 import lepetitcoin.model.Role;
+import lepetitcoin.model.SubCategory;
 import lepetitcoin.model.User;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -40,17 +42,19 @@ public class AnnonceControlleur {
 	public CategoryRepository catRep;
 	@Autowired
 	public RoleRepository roleRep;
+	@Autowired 
+	public SubCategoryRepository subCatRep;
 	//APi add new adsence
 	
-	@PostMapping(value="add/ads/{email}/{category}")
+	@PostMapping(value="add/ads/{email}/{subCategory}")
 	public  String creatAds(@RequestBody Annonce ads,@PathVariable(value="email") User email
-			,@PathVariable(value="category") Category category) {
+			,@PathVariable(value="subCategory") SubCategory subCategory) {
 		
-	
-		ads.setCategory(category);
 		
+		ads.setSubCategory(subCategory);
 		ads.setUser(email);
-		 adsRep.save(ads);
+		 
+		adsRep.save(ads);
 	  	return "annonce a été ajoutée";
 		
 	}
@@ -78,7 +82,8 @@ public class AnnonceControlleur {
 		//ad.setCategory(annonce.getCategory());
 		ad.setDate(annonce.getDate());;
 		ad.setDescription(annonce.getDescription());
-		ad.setEmplacement(annonce.getEmplacement());;
+		ad.setVille(annonce.getVille());
+		ad.setRegion(annonce.getRegion());
 		//ad.setId_ad(id);
 		ad.setName(annonce.getName());
 		ad.setPrice(annonce.getPrice());
