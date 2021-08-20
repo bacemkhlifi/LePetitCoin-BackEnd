@@ -93,7 +93,25 @@ public class AnnonceControlleur {
 		
 		return " l'annonce a été modifiée correctement ";
 	}
+	//get api by id
 	
+	@GetMapping(value="/annonce/{id}")
+	public AnnonceDTO getAdById(@PathVariable(value="id") Integer id ) {
+		 List<AnnonceDTO> lista=	annonceService.getAnnonces().stream().map(AnnonceDTO::new).collect(Collectors.toList());
+		for (AnnonceDTO ad : lista)
+		{
+			
+				if (ad.getId_ad() == id) {
+					return ad;
+				
+				
+			}
+
+		}
+		return null;
+		 
+		 
+	}
 	
 	
 }

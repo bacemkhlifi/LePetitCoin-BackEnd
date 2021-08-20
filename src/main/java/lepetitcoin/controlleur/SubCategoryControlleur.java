@@ -17,6 +17,7 @@ import lepetitcoin.dao.CategoryRepository;
 import lepetitcoin.dao.RoleRepository;
 import lepetitcoin.dao.SubCategoryRepository;
 import lepetitcoin.dao.UserRepository;
+import lepetitcoin.dto.AnnonceDTO;
 import lepetitcoin.dto.CategoryDTO;
 import lepetitcoin.dto.SubCategoryDTO;
 import lepetitcoin.model.Category;
@@ -49,5 +50,22 @@ public class SubCategoryControlleur {
 	@GetMapping(value="subcategories")
 	List<SubCategoryDTO> getCategories() {
 		return subCategoryService.getSubCategories().stream().map(SubCategoryDTO::new).collect(Collectors.toList());
+	}
+	//api get subcat
+
+	@GetMapping(value="/subcategories/{name}")
+	
+	public SubCategoryDTO getSubById(@PathVariable(value="name") String name ) {
+		 List<SubCategoryDTO> lista=getCategories();
+		for (SubCategoryDTO subcat : lista)
+		{
+			if (subcat.getName().equals(name)) {
+					return subcat;
+			}
+
+		}
+		return null;
+		 
+		 
 	}
 }

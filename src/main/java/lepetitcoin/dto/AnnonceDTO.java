@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import lepetitcoin.model.Annonce;
+import lepetitcoin.model.Criterion;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,8 @@ public class AnnonceDTO {
 	private String description;
 	private Date date = new Date(id_ad) ;
 	private List<String> user= new ArrayList<>();
-	
+	private List<String> criteres= new ArrayList<>();
+	private String livraison;
 	private String category;
 	private String subCategory;
 	public AnnonceDTO(Annonce annonce) {
@@ -33,6 +35,9 @@ public class AnnonceDTO {
 		this.setRegion(annonce.getRegion());
 		this.setPrice(annonce.getPrice());
 		this.setDate(annonce.getDate());
+
+		this.setLivraison(annonce.getLivraison());
+		
 		this.setDescription(annonce.getDescription());
 		 this.user.add( annonce.getUser().getEmail());
 		 this.user.add(annonce.getUser().getNom());
@@ -47,5 +52,12 @@ public class AnnonceDTO {
 		
 		this.setCategory(annonce.getSubCategory().getCategory().getName());
 		this.setSubCategory(annonce.getSubCategory().getName());
+	
+		this.criteres.add(annonce.getCritere1());
+		this.criteres.add(annonce.getCritere2());
+		this.criteres.add(annonce.getCritere3());
+		this.criteres.add(annonce.getCritere4());
+		this.criteres.add(annonce.getCritere5());
+		
 	}
 }

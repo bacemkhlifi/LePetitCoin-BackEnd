@@ -8,12 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import lepetitcoin.dao.CategoryRepository;
+import lepetitcoin.dao.CriterionRepository;
 import lepetitcoin.dao.RegionRepository;
 import lepetitcoin.dao.RoleRepository;
 import lepetitcoin.dao.SubCategoryRepository;
 import lepetitcoin.dao.UserRepository;
 import lepetitcoin.dao.VilleRepository;
 import lepetitcoin.model.Category;
+import lepetitcoin.model.Criterion;
 import lepetitcoin.model.Region;
 import lepetitcoin.model.Role;
 import lepetitcoin.model.SubCategory;
@@ -38,6 +40,8 @@ SpringApplication.run(Main.class,args);
 	public RegionRepository regionRep;
 	@Autowired
 	public VilleRepository villeRep;
+	@Autowired
+	public CriterionRepository criRep;
 	
 	@Bean
 	public void villes() {
@@ -54,26 +58,48 @@ SpringApplication.run(Main.class,args);
 		/////1er categories
 		Category categ= new Category(1,"Immobilier",null);
 		this.catRep.save(categ);
-		
-		SubCategory subCat = new SubCategory(1,"Bureaux&commerces",null,categ);
+		 
+		SubCategory subCat = new SubCategory(1,"Bureaux&commerces",null,categ,null);
 		this.subCatRep.save(subCat);
-		SubCategory subCat1 = new SubCategory(2,"Ventes immobilières",null,categ);
+		SubCategory subCat1 = new SubCategory(2,"Ventes immobilières",null,categ,null);
 		this.subCatRep.save(subCat1);
-		SubCategory subCat2 = new SubCategory(3,"Locations",null,categ);
+		SubCategory subCat2 = new SubCategory(3,"Locations",null,categ,null);
 		this.subCatRep.save(subCat2);
 		///// 2eme categorie
 		Category categ1= new Category(2,"Multimédia",null);
 		this.catRep.save(categ1);
 		
-		SubCategory subCat0 = new SubCategory(4,"Informatique",null,categ1);
+		SubCategory subCat0 = new SubCategory(4,"Informatique",null,categ1,null);
 		this.subCatRep.save(subCat0);
-		SubCategory subCat11 = new SubCategory(5,"Consoles & Jeux vidéo",null,categ1);
+		SubCategory subCat11 = new SubCategory(5,"Consoles & Jeux vidéo",null,categ1,null);
 		this.subCatRep.save(subCat11);
-		SubCategory subCat21 = new SubCategory(6,"Téléphonie",null,categ1);
+		SubCategory subCat21 = new SubCategory(6,"Téléphonie",null,categ1,null);
 		
 		this.subCatRep.save(subCat21);
-		SubCategory subCat31 = new SubCategory(7,"Image & Son",null,categ1);
+		SubCategory subCat31 = new SubCategory(7,"Image & Son",null,categ1,null);
 		this.subCatRep.save(subCat31);
+		
+		//3eme category
+		
+		Category categ10= new Category(3,"Véhicules",null);
+		this.catRep.save(categ10);
+		
+		SubCategory subCat00 = new SubCategory(8,"Motos",null,categ10,null);
+		this.subCatRep.save(subCat00);
+		SubCategory subCat110 = new SubCategory(9,"Voitures",null,categ10,null);
+		this.subCatRep.save(subCat110);
+		Criterion critere = new Criterion(0,"Kilométrage",null,subCat110);
+		this.criRep.save(critere);
+		Criterion critere1 = new Criterion(1,"Boite",null,subCat110);
+		this.criRep.save(critere1);
+		
+		
+		
+		SubCategory subCat210 = new SubCategory(10,"Vélos",null,categ10,null);
+		
+		this.subCatRep.save(subCat210);
+		SubCategory subCat310 = new SubCategory(11,"Remorques et Caravanes",null,categ10,null);
+		this.subCatRep.save(subCat310);
 		
 	
 	} 

@@ -35,4 +35,6 @@ public class SubCategory implements Serializable {
 	private List <Annonce>  annonce;
 	@ManyToOne
 	private Category category;
+	@OneToMany(mappedBy = "subCategory")
+	private List <Criterion>  criterion;
 }
