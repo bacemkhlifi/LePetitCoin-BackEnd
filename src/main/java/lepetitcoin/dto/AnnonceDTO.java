@@ -27,6 +27,7 @@ public class AnnonceDTO {
 	private List<String> user= new ArrayList<>();
 	private List<String> criteres= new ArrayList<>();
 	private String livraison;
+	private String photo;
 	private String category;
 	private String subCategory;
 	public AnnonceDTO(Annonce annonce) {
@@ -52,7 +53,7 @@ public class AnnonceDTO {
 		
 		this.setCategory(annonce.getSubCategory().getCategory().getName());
 		this.setSubCategory(annonce.getSubCategory().getName());
-	
+		this.setPhoto(annonce.getPhoto());
 		this.criteres.add(annonce.getCritere1());
 		this.criteres.add(annonce.getCritere2());
 		this.criteres.add(annonce.getCritere3());
@@ -60,4 +61,5 @@ public class AnnonceDTO {
 		this.criteres.add(annonce.getCritere5());
 		
 	}
+	
 }

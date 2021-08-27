@@ -58,7 +58,7 @@ public class Annonce implements Serializable {
 	@JsonIgnoreProperties("user")
 	private User user;
 	private String livraison;
-	
+	private String photo;
 	private String critere1;
 	private String critere2;
 	private String critere3;

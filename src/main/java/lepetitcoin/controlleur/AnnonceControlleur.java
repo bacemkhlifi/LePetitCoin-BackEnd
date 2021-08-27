@@ -1,5 +1,9 @@
 package lepetitcoin.controlleur;
 
+import java.awt.SystemColor;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -7,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import lepetitcoin.dao.AnnonceRepository;
 import lepetitcoin.dao.CategoryRepository;
@@ -42,15 +49,39 @@ public class AnnonceControlleur {
 	public CategoryRepository catRep;
 	@Autowired
 	public RoleRepository roleRep;
-	@Autowired 
-	public SubCategoryRepository subCatRep;
-	//APi add new adsence
-	
-	@PostMapping(value="add/ads/{email}/{subCategory}")
-	public  String creatAds(@RequestBody Annonce ads,@PathVariable(value="email") User email
-			,@PathVariable(value="subCategory") SubCategory subCategory) {
+ 
+
+//APi add new adsence
+	@PostMapping(value="add/ads/{email}/{subCategory}/{name}/{price}/{ville}/{region}/{description}/{livraison}")
+	public  String creatAds(@PathVariable(value="name") String name,
+			@PathVariable(value="price") String price,
+			@PathVariable(value="ville") String ville,
+			@PathVariable(value="region") String region,
+			@PathVariable(value="description") String description,
+			@PathVariable(value="livraison") String livraison,
+			@PathVariable(value="email") User email
+			,@PathVariable(value="subCategory") SubCategory subCategory
+			,@RequestParam("file") MultipartFile file  ) {
+		Annonce ads = new Annonce();
+		String fileName = file.getOriginalFilename();
 		
+			try {
+				file.transferTo(new File ("D:\\AnnoncesProject\\lenextad\\public\\fileAds\\"+fileName));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
+		ads.setName(name);
+		ads.setPrice(price);
+		ads.setDescription(description);
+		ads.setVille(ville);
+		ads.setRegion(region);
+		ads.setLivraison(livraison);
+		ads.setPhoto(fileName);
 		ads.setSubCategory(subCategory);
 		ads.setUser(email);
 		 
@@ -81,9 +112,9 @@ public class AnnonceControlleur {
 		Annonce ad = annonce1.get();
 		//ad.setCategory(annonce.getCategory());
 		ad.setDate(annonce.getDate());;
-		ad.setDescription(annonce.getDescription());
-		ad.setVille(annonce.getVille());
-		ad.setRegion(annonce.getRegion());
+		//ad.setDescription(annonce.getDescription());
+		//ad.setVille(annonce.getVille());
+		//ad.setRegion(annonce.getRegion());
 		//ad.setId_ad(id);
 		ad.setName(annonce.getName());
 		ad.setPrice(annonce.getPrice());
@@ -113,5 +144,81 @@ public class AnnonceControlleur {
 		 
 	}
 	
+	//get api by ville
 	
+		@GetMapping(value="/villes/annonce/{ville}")
+		public List<AnnonceDTO> getAdByVille(@PathVariable(value="ville") String ville ) {
+			 List<AnnonceDTO> lista=	annonceService.getAnnonces().stream().map(AnnonceDTO::new).collect(Collectors.toList());
+			
+			 List<AnnonceDTO> listeSorted= new ArrayList<AnnonceDTO>();
+			 for (AnnonceDTO ad : lista)
+			{
+
+					if (ad.getVille().equals(ville)) {
+						 listeSorted.add(ad); 
+				}
+			}
+			return listeSorted;	 
+		}
+		
+		//get api by region
+		
+			@GetMapping(value="/region/annonce/{region}")
+			public List<AnnonceDTO> getAdByRegion(@PathVariable(value="region") String region ) {
+				 List<AnnonceDTO> lista=	annonceService.getAnnonces().stream().map(AnnonceDTO::new).collect(Collectors.toList());
+				
+				 List<AnnonceDTO> listeSorted= new ArrayList<AnnonceDTO>();
+				 for (AnnonceDTO ad : lista)
+				{
+
+						if (ad.getRegion().equals(region)) {
+							 listeSorted.add(ad); 
+					}
+				}
+				return listeSorted;	 
+			}
+			//get api by region
+			
+			@GetMapping(value="/subcat/annonce/{subcat}")
+			public List<AnnonceDTO> getAdBySubCat(@PathVariable(value="subcat") String subcat ) {
+				 List<AnnonceDTO> lista=	annonceService.getAnnonces().stream().map(AnnonceDTO::new).collect(Collectors.toList());
+				
+				 List<AnnonceDTO> listeSorted= new ArrayList<AnnonceDTO>();
+				 for (AnnonceDTO ad : lista)
+				{
+
+						if (ad.getSubCategory().equals(subcat)) {
+							 listeSorted.add(ad); 
+					}
+				}
+				return listeSorted;	 
+			}
+			
+	//get api by category
+			
+			@GetMapping(value="/category/annonce/{category}")
+			public List<AnnonceDTO> getAdBycategory(@PathVariable(value="category") String category ) {
+				 List<AnnonceDTO> lista=	annonceService.getAnnonces().stream().map(AnnonceDTO::new).collect(Collectors.toList());
+				
+				 List<AnnonceDTO> listeSorted= new ArrayList<AnnonceDTO>();
+				 for (AnnonceDTO ad : lista)
+				{
+
+						if (ad.getCategory().equals(category)) {
+							 listeSorted.add(ad); 
+					}
+				}
+				return listeSorted;	 
+			}
+	//Upload photo
+/*	@PostMapping("/upload")
+	public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file){
+		String fileName = file.getOriginalFilename();
+		try {
+			file.transferTo(new File ("c:\\upload\\"+fileName));
+		} catch(Exception e) {
+			return ResponseEntity.ok("File not Uploaded ");
+		}
+		return ResponseEntity.ok("File Uploaded ");
+	}*/
 }

@@ -81,18 +81,19 @@ public class UserControlleur {
 			Role roleBeta0 = roleBeta.get();
 			roleBeta0.setRole(user.getType_user());
 			User userBeta = user0.get();
-			userBeta.setEmail(user.getEmail());
+			//userBeta.setEmail(user.getEmail());
 			userBeta.setPassword(user.getPassword());
-			userBeta.setCin(user.getCin());
+			//userBeta.setCin(user.getCin());
+			userBeta.setNom(user.getNom());
 			userBeta.setPrenom(user.getPrenom());
-			userBeta.setVille(user.getVille());
-			userBeta.setType_user(user.getType_user());
+			//userBeta.setVille(user.getVille());
+			//userBeta.setType_user(user.getType_user());
 			userBeta.setTelephone(user.getTelephone());
-			userBeta.setRegistre_comm(user.getRegistre_comm());
-			userBeta.setEtat_email(user.getEtat_email());
-			userBeta.setDatenaissance(user.getDatenaissance());
-			userBeta.setSexe(user.getSexe());
-			userBeta.setDate_insc(user.getDate_insc());
+			//userBeta.setRegistre_comm(user.getRegistre_comm());
+			//userBeta.setEtat_email(user.getEtat_email());
+			//userBeta.setDatenaissance(user.getDatenaissance());
+			//userBeta.setSexe(user.getSexe());
+			//userBeta.setDate_insc(user.getDate_insc());
 			userBeta.setRole(roleBeta0);
 		userRep.save(userBeta);
 			

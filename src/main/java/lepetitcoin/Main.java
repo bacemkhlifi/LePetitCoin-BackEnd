@@ -46,16 +46,30 @@ SpringApplication.run(Main.class,args);
 	@Bean
 	public void villes() {
 		///1er ville 
-		Ville ville= new Ville(0,"Sfax",null);
+		Ville ville= new Ville(1,"Sfax",null);
 		this.villeRep.save(ville);
+			Region region=new Region(1,"Jbeniyana",ville);
+			this.regionRep.save(region);
+			Region region1=new Region(2,"Agareb",ville);
+			this.regionRep.save(region1);
+		///2eme ville 
+		Ville ville1= new Ville(2,"Sousse",null);
+		this.villeRep.save(ville1);
+			Region region3=new Region(3,"Akouda",ville1);
+			this.regionRep.save(region3);
+		///3eme ville 
+		Ville ville2= new Ville(3,"Tunis",null);
+		this.villeRep.save(ville2);
+		///1er ville 
+		Ville ville3= new Ville(4,"Nabeul",null);
+		this.villeRep.save(ville3);
 		
-		Region region=new Region(0,"Jbeniyana",ville);
-		this.regionRep.save(region);
+		
 	}
 	
 	@Bean
 	public void addCats()   {
-		/////1er categories
+		//1er categories
 		Category categ= new Category(1,"Immobilier",null);
 		this.catRep.save(categ);
 		 
@@ -100,6 +114,27 @@ SpringApplication.run(Main.class,args);
 		this.subCatRep.save(subCat210);
 		SubCategory subCat310 = new SubCategory(11,"Remorques et Caravanes",null,categ10,null);
 		this.subCatRep.save(subCat310);
+		
+		
+		//4émè categorie
+		Category categ20= new Category(4,"Maison",null);
+		this.catRep.save(categ20);
+		//5émè categorie
+		Category categ30= new Category(5,"Loisirs et Divertissemen",null);
+		this.catRep.save(categ30);
+		//6émè categorie
+		Category categ40= new Category(6,"Habillement et Bien Etre",null);
+		this.catRep.save(categ40);
+		//7émè categorie
+		Category categ50= new Category(7,"Matériel Professionnel",null);
+		this.catRep.save(categ50);
+		//8émè categorie
+		Category categ60= new Category(8,"Emploi et Services",null);
+		this.catRep.save(categ60);
+		//9émè categorie
+		Category categ70= new Category(9,"Autres",null);
+		this.catRep.save(categ70);
+		
 		
 	
 	} 
