@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import lepetitcoin.dao.CategoryRepository;
 import lepetitcoin.dao.CriterionRepository;
+import lepetitcoin.dao.MessageRepository;
+import lepetitcoin.dao.ReclamationRepository;
 import lepetitcoin.dao.RegionRepository;
 import lepetitcoin.dao.RoleRepository;
 import lepetitcoin.dao.SubCategoryRepository;
@@ -16,6 +18,8 @@ import lepetitcoin.dao.UserRepository;
 import lepetitcoin.dao.VilleRepository;
 import lepetitcoin.model.Category;
 import lepetitcoin.model.Criterion;
+import lepetitcoin.model.Messages;
+import lepetitcoin.model.Reclamation;
 import lepetitcoin.model.Region;
 import lepetitcoin.model.Role;
 import lepetitcoin.model.SubCategory;
@@ -42,6 +46,10 @@ SpringApplication.run(Main.class,args);
 	public VilleRepository villeRep;
 	@Autowired
 	public CriterionRepository criRep;
+	@Autowired
+	public ReclamationRepository reclamRep;
+	@Autowired 
+	public MessageRepository msgRep;
 	
 	@Bean
 	public void villes() {
@@ -66,7 +74,14 @@ SpringApplication.run(Main.class,args);
 		
 		
 	}
-	
+	@Bean
+	public void testRecl() {
+		Reclamation reclam = new Reclamation();
+		reclam.setMessage("Espace de réclamations , Peut etre de type service et annonce ");
+		reclam.setEmail("Support@lepetitcoin.com");
+		
+		this.reclamRep.save(reclam);
+	}
 	@Bean
 	public void addCats()   {
 		//1er categories
@@ -138,6 +153,7 @@ SpringApplication.run(Main.class,args);
 		
 	
 	} 
+	
 	@Bean 
 	public void defaultUsers() {
 		User user0 = new User();
